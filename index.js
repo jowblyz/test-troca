@@ -1,6 +1,20 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const fetch = require("node-fetch");
+
+const allowCrossDomain = (req, res, next) => {
+  res.header(`Access-Control-Allow-Origin`, `*`);
+  res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
+  res.header(`Access-Control-Allow-Headers`, `Content-Type`);
+  next();
+};
+
+//...
+
+app.configure(() => {
+  app.use(allowCrossDomain);
+});
 
 function fetchImei(imei){
     console.log(imei)
