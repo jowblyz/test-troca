@@ -12,9 +12,11 @@ const allowCrossDomain = (req, res, next) => {
 
 //...
 
-app.configure(() => {
-  app.use(allowCrossDomain);
-});
+app.all('/*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+  });
 
 function fetchImei(imei){
     console.log(imei)
